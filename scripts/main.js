@@ -48,6 +48,58 @@
   }
 
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const typewriterTargets = Array.from(document.querySelectorAll("[data-typewriter]"));
+  if (typewriterTargets.length) {
+    typewriterTargets.forEach((el) => {
+      if (!el.dataset.typewriterOriginal) el.dataset.typewriterOriginal = el.textContent;
+      el.dataset.typewriterDone = "false";
+      if (reducedMotion) return;
+      el.textContent = "";
+    });
+
+    if (!reducedMotion && "IntersectionObserver" in window) {
+      const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          if (el.dataset.typewriterDone === "true") {
+            obs.unobserve(el);
+            return;
+          }
+
+          const fullText = (el.dataset.typewriterOriginal || el.textContent || "").replace(/\s+/g, " ").trim();
+          const chars = [...fullText];
+          const cps = 18;
+          const totalMs = Math.max(450, Math.min(2200, Math.round((chars.length / cps) * 1000)));
+          const start = performance.now();
+
+          const tick = (now) => {
+            const progress = Math.min(1, (now - start) / totalMs);
+            const count = Math.max(1, Math.floor(progress * chars.length));
+            el.textContent = chars.slice(0, count).join("");
+            if (progress < 1) requestAnimationFrame(tick);
+            else {
+              el.textContent = fullText;
+              el.dataset.typewriterDone = "true";
+              obs.unobserve(el);
+            }
+          };
+
+          requestAnimationFrame(tick);
+        });
+      }, { threshold: 0.35 });
+
+      typewriterTargets.forEach((el) => io.observe(el));
+    } else if (!reducedMotion) {
+      // Fallback: sin IntersectionObserver, mostramos el texto completo.
+      typewriterTargets.forEach((el) => {
+        el.textContent = (el.dataset.typewriterOriginal || el.textContent || "").replace(/\s+/g, " ").trim();
+        el.dataset.typewriterDone = "true";
+      });
+    }
+  }
+
   if (reducedMotion) return;
   if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
 

@@ -52,6 +52,8 @@ Sin embargo, `styles/main.css` y `scripts/main.js` conservan configuración para
 - Slide 2 (si existe en HTML):
   - parallax diferencial shape/texto,
   - typewriter para el texto `I - Del inicio de todas las historias`.
+- Textos narrativos (cuando corresponde):
+  - aplicar `data-typewriter` en el elemento (ej. `p`) para que al entrar en viewport se escriba con efecto máquina de escribir.
 - Entradas por cards para:
   - `#page-03 .page03-card`
   - `#page-05 .page05-card`
