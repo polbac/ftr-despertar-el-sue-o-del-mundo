@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DESPERTAR ELSUEÑO DEL MUNDO / FKTR</title>
+    <meta
+      name="description"
+      content="Experiencia scrollytelling basada en comic.pdf con animaciones y capas separadas."
+    />
+    <link rel="stylesheet" href="./styles/main.css" />
+  </head>
+  <body>
+    <main id="comic-landing">
+      <section class="scene scene--orange" id="page-01" data-scene="01" aria-label="Página 1">
+        <div class="layer layer--text">
+          <img src="./assets/SVG/slide-1-titulo.svg" alt="" loading="lazy" />
+        </div>
+        <div class="layer layer--shape">
+          <img src="./assets/SVG/slide-1-shape.svg" alt="" loading="lazy" />
+        </div>
+      </section>
+
+      <section class="scene scene--white" id="page-02" data-scene="02" aria-label="Página 2">
+        <div class="layer layer--shape">
+          <img src="./assets/SVG/slide-2-shape.svg" alt="" loading="lazy" />
+        </div>
+      </section>
+
+      <section class="scene scene--white" id="page-03" data-scene="03" aria-label="Página 3">
+        <div class="page03-content">
+          <div class="frame-window" data-scroll-window>
+            <img class="frame-window__shape" src="./assets/SVG/slide-3-text.svg" alt="" loading="lazy" />
+          </div>
+          <p>
+            Hay una piedra. Es plana y pulida y puedo esconderla entre el pulgar y el
+            índice. Tragarla, más chica que una moneda, deslizada hasta la tráquea sobre
+            mi lengua,
+          </p>
+        </div>
+      </section>
+
+    </main>
+
+    <noscript>Esta experiencia requiere JavaScript para reproducir animaciones.</noscript>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+    <script src="./scripts/main.js"></script>
+  </body>
+</html>

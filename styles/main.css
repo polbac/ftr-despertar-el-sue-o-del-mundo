@@ -1,0 +1,416 @@
+:root {
+  --bg-main: #000;
+  --bg-orange: #FFB30B;
+  --bg-scene: #171a21;
+  --fg-main: #f8f6f2;
+  --fg-muted: #c9c7c2;
+  --max-text: 68ch;
+}
+
+@font-face {
+  font-family: "SlideOneFont";
+  src:
+    local("HiraKakuStdN-W8-AlphaNum"),
+    local("Hiragino Kaku Gothic StdN W8");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-main);
+  color: var(--fg-main);
+  font-family: "Courier New", Courier, monospace;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+#comic-landing {
+  position: relative;
+}
+
+.scene {
+  position: relative;
+  min-height: 100vh;
+  padding: 0;
+  display: grid;
+  align-items: center;
+  background: linear-gradient(180deg, #171a21 0%, #101114 100%);
+  isolation: isolate;
+}
+
+.scene--orange {
+  background: var(--bg-orange);
+  color: #121212;
+}
+
+.scene--quiet {
+  background: linear-gradient(180deg, #0e1015 0%, #0a0b0f 100%);
+}
+
+.scene--white {
+  background: #fff;
+  color: #1e1e1e;
+}
+
+.scene__bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 20%, rgb(255 255 255 / 0.24) 0%, rgb(255 255 255 / 0) 44%);
+  z-index: 0;
+}
+
+.layer {
+  position: relative;
+  z-index: 1;
+}
+
+.layer--shape {
+  position: absolute;
+  max-width: min(36vw, 520px);
+  width: 100%;
+  height: auto;
+  opacity: 0.88;
+  pointer-events: none;
+}
+
+.layer--a {
+  top: 10vh;
+  right: 5vw;
+}
+
+.layer--b {
+  bottom: 11vh;
+  left: 7vw;
+}
+
+.layer--text {
+  max-width: var(--max-text);
+  margin-inline: auto;
+}
+
+.kicker {
+  margin: 0 0 0.4rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2.2rem, 7vw, 5.4rem);
+  line-height: 1;
+  text-wrap: balance;
+}
+
+.prose p {
+  margin: 0 0 1rem;
+  font-size: clamp(1rem, 1.4vw, 1.4rem);
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+
+.interlude {
+  text-align: center;
+}
+
+.interlude p {
+  margin: 0;
+  color: var(--fg-muted);
+  font-size: clamp(1rem, 2vw, 1.8rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#page-01 .layer--text {
+  position: absolute;
+  top: 50%;
+  right: 6vw;
+  margin: 0;
+  width: min(42vw, 680px);
+  height: 70vh;
+  text-align: right;
+  transform: translateY(-50%);
+}
+
+#page-01 {
+  background: #000;
+  min-height: 100vh;
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+}
+
+#page-01 .layer--text img {
+  display: block;
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  margin-left: auto;
+}
+
+#page-01 .layer--shape {
+  position: absolute;
+  top: 50%;
+  left: -40%;
+  right: auto;
+  transform: translateY(-50%);
+  width: 70vw;
+  max-width: none;
+  opacity: 1;
+}
+
+#page-01 .layer--shape img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+#page-01 .kicker,
+#page-01 h1 {
+  color: #fff;
+  text-align: right;
+  font-family: "SlideOneFont", "Courier New", Courier, monospace;
+}
+
+#page-02 {
+  background: #fff;
+  min-height: 100vh;
+  margin-top: 100vh;
+  z-index: 2;
+}
+
+#page-02 .layer--shape {
+  position: absolute;
+  top: 50%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+  width: 10vw;
+  max-width: none;
+  opacity: 1;
+}
+
+#page-02 .layer--shape img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+#page-03 {
+  background: #fff;
+  min-height: 100vh;
+  padding: 3vw;
+  z-index: 3;
+}
+
+#page-03 .page03-content {
+  max-width: 100%;
+}
+
+#page-03 .frame-window {
+  position: relative;
+  width: 100%;
+  height: 56vh;
+  overflow: hidden;
+  border: 2px solid #000;
+  margin-bottom: 1.5rem;
+}
+
+#page-03 .frame-window__shape {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+
+#page-03 .page03-content p {
+  margin: 0;
+  color: #000;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+#page-04 {
+  min-height: auto;
+  padding: 1.4vw;
+  background: #fff;
+}
+
+#page-04 .page04-art {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+#page-05 {
+  min-height: auto;
+  padding: 1.4vw;
+  background: #fff;
+}
+
+#page-05 .page05-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(180px, 0.75fr);
+  grid-template-areas:
+    "top top"
+    "main side";
+  gap: 1.2vw;
+}
+
+#page-05 .page05-card {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+#page-05 .page05-card--top {
+  grid-area: top;
+}
+
+#page-05 .page05-card--main {
+  grid-area: main;
+}
+
+#page-05 .page05-card--side {
+  grid-area: side;
+}
+
+#page-08 .layer--a {
+  top: auto;
+  bottom: 10vh;
+  right: 8vw;
+  max-width: min(60vw, 860px);
+}
+
+#page-09 .layer--a {
+  top: 16vh;
+  right: 2vw;
+  max-width: min(30vw, 340px);
+}
+
+#page-13 .layer--a {
+  top: auto;
+  bottom: 14vh;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  max-width: min(18vw, 190px);
+}
+
+@media (max-width: 900px) {
+  .scene {
+    min-height: 125vh;
+    padding: 10vh 6vw;
+  }
+
+  .layer--shape {
+    max-width: 45vw;
+  }
+
+  .layer--a {
+    right: 2vw;
+  }
+
+  .layer--b {
+    left: 2vw;
+  }
+
+  #page-02 .layer--a {
+    width: 55vw;
+  }
+
+  #page-03 {
+    padding: 3vw;
+  }
+
+  #page-04 {
+    padding: 1.2rem;
+  }
+
+  #page-05 {
+    padding: 1.2rem;
+  }
+
+  #page-05 .page05-grid {
+    gap: 0.8rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .scene {
+    min-height: 112vh;
+    padding: 9vh 1.25rem;
+  }
+
+  .layer--shape {
+    max-width: 56vw;
+    opacity: 0.72;
+  }
+
+  .prose p {
+    font-size: 1.04rem;
+    line-height: 1.6;
+  }
+
+  #page-02 .layer--a {
+    width: 55vw;
+  }
+
+  #page-03 {
+    padding: 3vw;
+  }
+
+  #page-04 {
+    padding: 1.2rem;
+  }
+
+  #page-05 {
+    padding: 1.2rem;
+  }
+
+  #page-05 .page05-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "top"
+      "main"
+      "side";
+  }
+
+  #page-05 .page05-card--side {
+    max-height: 80vh;
+    object-fit: contain;
+    background: #1e1e1e;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .layer,
+  .scene {
+    transition: none !important;
+    animation: none !important;
+  }
+}
