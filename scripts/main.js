@@ -1,4 +1,52 @@
 (() => {
+  const soundIndicator = document.querySelector("#sound-indicator");
+  let soundAudio = null;
+  let isPlaying = false;
+
+  const setSoundUi = (playing) => {
+    isPlaying = playing;
+    if (!soundIndicator) return;
+    soundIndicator.classList.toggle("is-playing", playing);
+    soundIndicator.setAttribute("aria-pressed", playing ? "true" : "false");
+    soundIndicator.setAttribute("aria-label", playing ? "Sonido: reproduciéndose" : "Sonido: detenido");
+  };
+
+  const ensureAudio = () => {
+    if (soundAudio) return soundAudio;
+    // Nota: el archivo tiene espacios en el nombre; encodeURI los convierte a %20.
+    soundAudio = new Audio(encodeURI("./audio muestra komic.mp3"));
+    soundAudio.preload = "auto";
+    return soundAudio;
+  };
+
+  const playAudio = async () => {
+    const audio = ensureAudio();
+    try {
+      await audio.play();
+      setSoundUi(true);
+    } catch {
+      // Si el navegador bloquea autoplay, mantenemos UI en "detenido".
+      setSoundUi(false);
+    }
+  };
+
+  const stopAudio = () => {
+    if (!soundAudio) {
+      setSoundUi(false);
+      return;
+    }
+    soundAudio.pause();
+    setSoundUi(false);
+  };
+
+  if (soundIndicator) {
+    setSoundUi(false);
+    soundIndicator.addEventListener("click", () => {
+      if (isPlaying) stopAudio();
+      else playAudio();
+    });
+  }
+
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reducedMotion) return;
   if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
