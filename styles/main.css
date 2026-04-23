@@ -377,10 +377,11 @@ h1 {
   will-change: opacity;
 }
 
-/* Escena 7: aire blanco alrededor; panel negro solo para el shape; texto fuera, sobre el blanco */
+/* Escena 7: aire (padding) alrededor de toda la escena; panel negro solo el shape; texto abajo */
 #page-07 {
   z-index: 7;
-  width: 100vw;
+  width: 100%;
+  max-width: 100%;
   min-height: 100vh;
   box-sizing: border-box;
   padding: 1.4vw;
@@ -401,7 +402,7 @@ h1 {
   flex-direction: column;
   align-items: stretch;
   justify-content: center;
-  padding: 1.4vw;
+  padding: 0;
   overflow: hidden;
 }
 
@@ -432,10 +433,196 @@ h1 {
   line-height: 1.2;
   text-wrap: pretty;
   width: 100%;
-  max-width: var(--max-text);
+  max-width: none;
   box-sizing: border-box;
   padding: 0;
-  align-self: center;
+  align-self: stretch;
+}
+
+/* Escena 8: igual que la 7 (aire, panel negro, texto abajo) */
+#page-08 {
+  z-index: 8;
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 1.4vw;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1.5rem;
+  isolation: isolate;
+}
+
+#page-08 .page08-bounded {
+  flex: 0 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  padding: 0;
+  overflow: hidden;
+}
+
+#page-08 .page08-shape {
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+#page-08 .page08-shape img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: min(52vh, 100%);
+  object-fit: contain;
+}
+
+#page-08 > p {
+  margin: 0;
+  flex: 0 0 auto;
+  color: #1e1e1e;
+  background: #fff;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 2rem;
+  line-height: 1.2;
+  text-wrap: pretty;
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+  padding: 0;
+  align-self: stretch;
+}
+
+/* Escena 9: misma config que 7/8 */
+#page-09 {
+  z-index: 9;
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 1.4vw;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1.5rem;
+  isolation: isolate;
+}
+
+#page-09 .page09-bounded {
+  flex: 0 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  padding: 0;
+  overflow: hidden;
+}
+
+#page-09 .page09-shape {
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+#page-09 .page09-shape img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: min(52vh, 100%);
+  object-fit: contain;
+}
+
+#page-09 > p {
+  margin: 0;
+  flex: 0 0 auto;
+  color: #1e1e1e;
+  background: #fff;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 2rem;
+  line-height: 1.2;
+  text-wrap: pretty;
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+  padding: 0;
+  align-self: stretch;
+}
+
+/* Escena 10: misma config que 7/8/9 */
+#page-10 {
+  z-index: 10;
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 1.4vw;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1.5rem;
+  isolation: isolate;
+}
+
+#page-10 .page10-bounded {
+  flex: 0 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  padding: 0;
+  overflow: hidden;
+}
+
+#page-10 .page10-shape {
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+#page-10 .page10-shape img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: min(52vh, 100%);
+  object-fit: contain;
+}
+
+#page-10 > p {
+  margin: 0;
+  flex: 0 0 auto;
+  color: #1e1e1e;
+  background: #fff;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 2rem;
+  line-height: 1.2;
+  text-wrap: pretty;
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+  padding: 0;
+  align-self: stretch;
 }
 
 #page-03 .page03-content,
@@ -557,12 +744,18 @@ h1 {
     padding: 1.2rem;
   }
 
-  #page-07 {
+  #page-07,
+  #page-08,
+  #page-09,
+  #page-10 {
     padding: 1.2rem;
   }
 
-  #page-07 .page07-bounded {
-    padding: 1.2rem;
+  #page-07 .page07-bounded,
+  #page-08 .page08-bounded,
+  #page-09 .page09-bounded,
+  #page-10 .page10-bounded {
+    padding: 0;
   }
 }
 
@@ -603,12 +796,18 @@ h1 {
     padding: 1.2rem;
   }
 
-  #page-07 {
+  #page-07,
+  #page-08,
+  #page-09,
+  #page-10 {
     padding: 1.2rem;
   }
 
-  #page-07 .page07-bounded {
-    padding: 1.2rem;
+  #page-07 .page07-bounded,
+  #page-08 .page08-bounded,
+  #page-09 .page09-bounded,
+  #page-10 .page10-bounded {
+    padding: 0;
   }
 }
 
