@@ -294,18 +294,158 @@ h1 {
   height: auto;
 }
 
-#page-03 {
+#page-03,
+#page-04,
+#page-05 {
   background: #fff;
   min-height: 100vh;
   padding: 3vw;
+}
+
+#page-03 {
   z-index: 3;
 }
 
-#page-03 .page03-content {
+#page-04 {
+  z-index: 4;
+}
+
+#page-05 {
+  z-index: 5;
+}
+
+@keyframes page06-shape-opacity {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Escena 6: 100vh; aire blanco (márgenes) alrededor; panel interior negro */
+#page-06 {
+  z-index: 6;
+  min-height: 100vh;
+  height: 100vh;
+  max-height: 100vh;
+  box-sizing: border-box;
+  padding: 1.4vw;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  isolation: isolate;
+}
+
+#page-06 .page06-bounded {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  box-sizing: border-box;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.4vw;
+  overflow: hidden;
+}
+
+#page-06 .page06-shape {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  min-height: 0;
+  max-height: 100%;
+  pointer-events: none;
+}
+
+#page-06 .page06-shape img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: 70vh;
+  max-height: 100%;
+  object-fit: contain;
+  animation: page06-shape-opacity 4.5s ease-in-out infinite;
+  will-change: opacity;
+}
+
+/* Escena 7: aire blanco alrededor; panel negro solo para el shape; texto fuera, sobre el blanco */
+#page-07 {
+  z-index: 7;
+  width: 100vw;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 1.4vw;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1.5rem;
+  isolation: isolate;
+}
+
+#page-07 .page07-bounded {
+  flex: 0 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  padding: 1.4vw;
+  overflow: hidden;
+}
+
+#page-07 .page07-shape {
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+#page-07 .page07-shape img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: min(52vh, 100%);
+  object-fit: contain;
+}
+
+#page-07 > p {
+  margin: 0;
+  flex: 0 0 auto;
+  color: #1e1e1e;
+  background: #fff;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 2rem;
+  line-height: 1.2;
+  text-wrap: pretty;
+  width: 100%;
+  max-width: var(--max-text);
+  box-sizing: border-box;
+  padding: 0;
+  align-self: center;
+}
+
+#page-03 .page03-content,
+#page-04 .page04-content,
+#page-05 .page05-content {
   max-width: 100%;
 }
 
-#page-03 .frame-window {
+#page-03 .frame-window,
+#page-04 .frame-window {
   position: relative;
   width: 100%;
   height: 56vh;
@@ -314,7 +454,20 @@ h1 {
   margin-bottom: 1.5rem;
 }
 
-#page-03 .frame-window__shape {
+/* slide-5: 100% de ancho; el alto lo dicta la proporcion intrinseca de la imagen (SVG) */
+#page-05 .frame-window {
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  overflow: hidden;
+  border: 2px solid #000;
+  margin-bottom: 1.5rem;
+  line-height: 0;
+}
+
+#page-03 .frame-window__shape,
+#page-04 .frame-window__shape {
   position: absolute;
   left: 0;
   bottom: 0;
@@ -325,59 +478,22 @@ h1 {
   object-position: center;
 }
 
-#page-03 .page03-content p {
+#page-05 .frame-window__shape {
+  position: static;
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
+#page-03 .page03-content p,
+#page-04 .page04-content p,
+#page-05 .page05-content p {
   margin: 0;
   color: #000;
   font-family: "Courier New", Courier, monospace;
   font-size: 2rem;
   line-height: 1.2;
-}
-
-#page-04 {
-  min-height: auto;
-  padding: 1.4vw;
-  background: #fff;
-}
-
-#page-04 .page04-art {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-#page-05 {
-  min-height: auto;
-  padding: 1.4vw;
-  background: #fff;
-}
-
-#page-05 .page05-grid {
-  width: 100%;
-  display: grid;
-  grid-template-columns: minmax(0, 3fr) minmax(180px, 0.75fr);
-  grid-template-areas:
-    "top top"
-    "main side";
-  gap: 1.2vw;
-}
-
-#page-05 .page05-card {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-}
-
-#page-05 .page05-card--top {
-  grid-area: top;
-}
-
-#page-05 .page05-card--main {
-  grid-area: main;
-}
-
-#page-05 .page05-card--side {
-  grid-area: side;
 }
 
 #page-08 .layer--a {
@@ -424,20 +540,29 @@ h1 {
     width: 55vw;
   }
 
-  #page-03 {
+  #page-03,
+  #page-04,
+  #page-05 {
     padding: 3vw;
   }
 
-  #page-04 {
+  #page-06 {
+    min-height: 100vh;
+    height: 100vh;
+    max-height: 100vh;
     padding: 1.2rem;
   }
 
-  #page-05 {
+  #page-06 .page06-bounded {
     padding: 1.2rem;
   }
 
-  #page-05 .page05-grid {
-    gap: 0.8rem;
+  #page-07 {
+    padding: 1.2rem;
+  }
+
+  #page-07 .page07-bounded {
+    padding: 1.2rem;
   }
 }
 
@@ -461,30 +586,29 @@ h1 {
     width: 55vw;
   }
 
-  #page-03 {
+  #page-03,
+  #page-04,
+  #page-05 {
     padding: 3vw;
   }
 
-  #page-04 {
+  #page-06 {
+    min-height: 100vh;
+    height: 100vh;
+    max-height: 100vh;
     padding: 1.2rem;
   }
 
-  #page-05 {
+  #page-06 .page06-bounded {
     padding: 1.2rem;
   }
 
-  #page-05 .page05-grid {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "top"
-      "main"
-      "side";
+  #page-07 {
+    padding: 1.2rem;
   }
 
-  #page-05 .page05-card--side {
-    max-height: 80vh;
-    object-fit: contain;
-    background: #1e1e1e;
+  #page-07 .page07-bounded {
+    padding: 1.2rem;
   }
 }
 
@@ -497,6 +621,11 @@ h1 {
   .scene {
     transition: none !important;
     animation: none !important;
+  }
+
+  #page-06 .page06-shape img {
+    animation: none !important;
+    opacity: 1;
   }
 
   .sound-indicator.is-playing .sound-indicator__wave [id^="Line_"] {

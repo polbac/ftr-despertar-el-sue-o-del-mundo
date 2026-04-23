@@ -207,32 +207,56 @@
     });
   }
 
-  // Efecto "ventana": shape mas grande que el contenedor y desplazamiento vertical por scroll.
+  // Efecto "ventana": shape mas grande que el contenedor y desplazamiento por scroll
+  // (vertical por defecto; data-scroll-axis="x" en el contenedor = eje x).
   const frameWindows = gsap.utils.toArray("[data-scroll-window]");
   frameWindows.forEach((windowEl) => {
     const shape = windowEl.querySelector(".frame-window__shape");
     if (!shape) return;
+    const axisX = (windowEl.dataset.scrollAxis || "").toLowerCase() === "x";
 
-    gsap.set(shape, {
-      scaleY: 1.2,
-      transformOrigin: "center bottom",
-    });
-
-    gsap.fromTo(
-      shape,
-      { yPercent: 0, scaleY: 1.2 },
-      {
-        yPercent: 20,
+    if (axisX) {
+      // Escala uniforme (no scaleX solo, que distorsiona el ancho de la imagen).
+      gsap.set(shape, {
+        scale: 1.2,
+        transformOrigin: "center center",
+      });
+      gsap.fromTo(
+        shape,
+        { xPercent: -8, scale: 1.2 },
+        {
+          xPercent: 0,
+          scale: 1.2,
+          ease: "none",
+          scrollTrigger: {
+            trigger: windowEl,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        }
+      );
+    } else {
+      gsap.set(shape, {
         scaleY: 1.2,
-        ease: "none",
-        scrollTrigger: {
-          trigger: windowEl,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
-        },
-      }
-    );
+        transformOrigin: "center bottom",
+      });
+      gsap.fromTo(
+        shape,
+        { yPercent: 0, scaleY: 1.2 },
+        {
+          yPercent: 20,
+          scaleY: 1.2,
+          ease: "none",
+          scrollTrigger: {
+            trigger: windowEl,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        }
+      );
+    }
   });
 
   // Slide 2: parallax diferencial (shape mas rapido que texto).
