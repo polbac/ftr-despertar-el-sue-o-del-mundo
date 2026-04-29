@@ -1,4 +1,84 @@
 (() => {
+  const customCursor = document.querySelector("#custom-cursor");
+  const enableCustomCursor =
+    customCursor &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches &&
+    window.matchMedia("(pointer: fine)").matches &&
+    window.matchMedia("(hover: hover)").matches;
+
+  if (enableCustomCursor) {
+    customCursor.hidden = false;
+    document.documentElement.classList.add("has-custom-cursor");
+
+    const TRAIL_MIN_MS = 38;
+    const TRAIL_MIN_DIST = 9;
+    const TRAIL_MAX_ACTIVE = 72;
+    let lastTrailX = null;
+    let lastTrailY = null;
+    let lastTrailT = 0;
+    let trailActive = 0;
+
+    const spawnTrail = (x, y) => {
+      if (trailActive >= TRAIL_MAX_ACTIVE) return;
+      trailActive += 1;
+      const el = document.createElement("div");
+      el.className = "custom-cursor-trail";
+      el.setAttribute("aria-hidden", "true");
+      el.style.left = `${x}px`;
+      el.style.top = `${y}px`;
+      document.body.appendChild(el);
+      el.addEventListener(
+        "animationend",
+        () => {
+          el.remove();
+          trailActive -= 1;
+        },
+        { once: true }
+      );
+    };
+
+    const onMove = (e) => {
+      const x = e.clientX;
+      const y = e.clientY;
+      customCursor.style.left = `${x}px`;
+      customCursor.style.top = `${y}px`;
+      customCursor.classList.add("is-active");
+
+      const now = performance.now();
+      if (lastTrailX === null || lastTrailY === null) {
+        lastTrailX = x;
+        lastTrailY = y;
+        lastTrailT = now;
+      } else {
+        const dt = now - lastTrailT;
+        const dist = Math.hypot(x - lastTrailX, y - lastTrailY);
+        if (dt >= TRAIL_MIN_MS && dist >= TRAIL_MIN_DIST) {
+          spawnTrail(x, y);
+          lastTrailX = x;
+          lastTrailY = y;
+          lastTrailT = now;
+        }
+      }
+    };
+
+    document.addEventListener("pointermove", onMove, { passive: true });
+
+    document.addEventListener(
+      "pointerdown",
+      () => {
+        customCursor.classList.add("is-pressed");
+      },
+      { passive: true }
+    );
+    document.addEventListener(
+      "pointerup",
+      () => {
+        customCursor.classList.remove("is-pressed");
+      },
+      { passive: true }
+    );
+  }
+
   const soundIndicator = document.querySelector("#sound-indicator");
   const page01Start = document.querySelector("#page01-start");
   const infoTrigger = document.querySelector("#info-trigger");
@@ -122,19 +202,38 @@
 
     const buildCharSpans = (text) => {
       const frag = document.createDocumentFragment();
-      [...text].forEach((ch) => {
-        if (ch === "\n") {
+      const lines = text.split("\n");
+
+      const appendCharsForWord = (word, container) => {
+        [...word].forEach((ch) => {
+          const span = document.createElement("span");
+          span.className = "tw-char";
+          span.style.opacity = "0";
+          span.style.display = "inline";
+          span.style.willChange = "opacity";
+          span.textContent = ch;
+          container.appendChild(span);
+        });
+      };
+
+      lines.forEach((line, lineIdx) => {
+        if (lineIdx > 0) frag.appendChild(document.createElement("br"));
+
+        if (line.length === 0) {
           frag.appendChild(document.createElement("br"));
           return;
         }
-        const span = document.createElement("span");
-        span.className = "tw-char";
-        span.style.opacity = "0";
-        span.style.display = "inline-block";
-        span.style.willChange = "opacity";
-        span.textContent = ch === " " ? "\u00A0" : ch;
-        frag.appendChild(span);
+
+        const words = line.split(/ +/).filter(Boolean);
+        words.forEach((word, wi) => {
+          if (wi > 0) frag.appendChild(document.createTextNode(" "));
+          const wordSpan = document.createElement("span");
+          wordSpan.className = "tw-word";
+          appendCharsForWord(word, wordSpan);
+          frag.appendChild(wordSpan);
+        });
       });
+
       return frag;
     };
 

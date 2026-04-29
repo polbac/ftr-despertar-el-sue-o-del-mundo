@@ -35,6 +35,108 @@ body {
   overflow-x: hidden;
 }
 
+/* Texto animado por caracteres: no partir palabras al hacer wrap */
+[data-typewriter] .tw-word {
+  white-space: nowrap;
+  display: inline;
+}
+
+[data-typewriter] {
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+/* Cursor custom: cuadrado con borde negro + inversión del contenido bajo el cursor */
+.custom-cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 2px solid #000;
+  background-color: rgba(255, 255, 255, 0.01);
+  backdrop-filter: invert(1);
+  -webkit-backdrop-filter: invert(1);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 999999;
+  opacity: 0;
+  transition: opacity 90ms ease, transform 90ms ease, width 90ms ease, height 90ms ease;
+}
+
+.custom-cursor.is-active {
+  opacity: 1;
+}
+
+.custom-cursor.is-pressed {
+  width: 11px;
+  height: 11px;
+}
+
+@supports not ((backdrop-filter: invert(1)) or (-webkit-backdrop-filter: invert(1))) {
+  .custom-cursor {
+    background: #fff;
+    mix-blend-mode: difference;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+@keyframes custom-cursor-trail-out {
+  0% {
+    opacity: 0.75;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.12);
+  }
+}
+
+.custom-cursor-trail {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 2px solid #000;
+  background-color: rgba(255, 255, 255, 0.01);
+  backdrop-filter: invert(1);
+  -webkit-backdrop-filter: invert(1);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 999998;
+  animation: custom-cursor-trail-out 0.58s ease-out forwards;
+  will-change: opacity, transform;
+}
+
+@supports not ((backdrop-filter: invert(1)) or (-webkit-backdrop-filter: invert(1))) {
+  .custom-cursor-trail {
+    background: #fff;
+    mix-blend-mode: difference;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+html.has-custom-cursor,
+html.has-custom-cursor body,
+html.has-custom-cursor button,
+html.has-custom-cursor a,
+html.has-custom-cursor [role="button"],
+html.has-custom-cursor input,
+html.has-custom-cursor textarea,
+html.has-custom-cursor select {
+  cursor: none !important;
+}
+
+
 #comic-landing {
   position: relative;
 }
