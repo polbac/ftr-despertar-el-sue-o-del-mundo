@@ -839,8 +839,8 @@ h1 {
 
 #page-09 .page09-corner {
   position: absolute;
-  top: 3vw;
-  right: 3vw;
+  top: 0;
+  right: 2vw;
   margin: 0;
   color: #000;
   font-family: "Courier New", Courier, monospace;
