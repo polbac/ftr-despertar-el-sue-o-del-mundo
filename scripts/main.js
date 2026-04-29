@@ -1,10 +1,29 @@
 (() => {
   const soundIndicator = document.querySelector("#sound-indicator");
+  const page01Start = document.querySelector("#page01-start");
   const infoTrigger = document.querySelector("#info-trigger");
   const infoOverlay = document.querySelector("#info-overlay");
   const infoClose = document.querySelector("#info-close");
   let soundAudio = null;
   let isPlaying = false;
+
+  const animateScrollTo = (targetY, { durationMs = 900 } = {}) => {
+    const startY = window.scrollY || window.pageYOffset || 0;
+    const delta = targetY - startY;
+    if (Math.abs(delta) < 2) return;
+
+    const easeInOutCubic = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+    const start = performance.now();
+
+    const tick = (now) => {
+      const t = Math.min(1, (now - start) / durationMs);
+      const nextY = Math.round(startY + delta * easeInOutCubic(t));
+      window.scrollTo(0, nextY);
+      if (t < 1) requestAnimationFrame(tick);
+    };
+
+    requestAnimationFrame(tick);
+  };
 
   const setSoundUi = (playing) => {
     isPlaying = playing;
@@ -50,6 +69,24 @@
     });
   }
 
+  if (page01Start) {
+    page01Start.addEventListener("click", () => {
+      const page01 = document.querySelector("#page-01");
+      const page02 = document.querySelector("#page-02");
+      const nextScene =
+        page02 ||
+        page01?.nextElementSibling?.closest?.(".scene") ||
+        document.querySelector(".scene:not(#page-01)");
+
+      if (nextScene) {
+        const y = Math.max(0, nextScene.getBoundingClientRect().top + (window.scrollY || 0));
+        animateScrollTo(y, { durationMs: 950 });
+      }
+
+      if (!isPlaying) playAudio();
+    });
+  }
+
   const setInfoUi = (open) => {
     if (!infoOverlay) return;
     infoOverlay.hidden = !open;
@@ -77,17 +114,52 @@
 
   const typewriterTargets = Array.from(document.querySelectorAll("[data-typewriter]"));
   if (typewriterTargets.length) {
+    const htmlToPlainTextWithNewlines = (html) => {
+      const temp = document.createElement("div");
+      temp.innerHTML = String(html).replace(/<br\s*\/?>/gi, "\n");
+      return temp.textContent || "";
+    };
+
+    const buildCharSpans = (text) => {
+      const frag = document.createDocumentFragment();
+      [...text].forEach((ch) => {
+        if (ch === "\n") {
+          frag.appendChild(document.createElement("br"));
+          return;
+        }
+        const span = document.createElement("span");
+        span.className = "tw-char";
+        span.style.opacity = "0";
+        span.style.display = "inline-block";
+        span.style.willChange = "opacity";
+        span.textContent = ch === " " ? "\u00A0" : ch;
+        frag.appendChild(span);
+      });
+      return frag;
+    };
+
     typewriterTargets.forEach((el) => {
-      if (!el.dataset.typewriterOriginal) el.dataset.typewriterOriginal = el.textContent;
+      if (!el.dataset.typewriterOriginalHtml) el.dataset.typewriterOriginalHtml = el.innerHTML;
       el.dataset.typewriterDone = "false";
-      if (reducedMotion) return;
-      // Evitar “saltos” de layout: fijamos el alto que ocupa el texto final
-      // antes de vaciar el contenido para escribirlo progresivamente.
-      if (!el.style.minHeight || el.style.minHeight === "0px") {
-        const rect = el.getBoundingClientRect();
-        if (rect.height > 0) el.style.minHeight = `${Math.ceil(rect.height)}px`;
+      if (reducedMotion) {
+        el.style.opacity = "1";
+        el.style.transform = "";
+        return;
       }
-      el.textContent = "";
+      const text = htmlToPlainTextWithNewlines(el.dataset.typewriterOriginalHtml)
+        .replace(/\r\n?/g, "\n")
+        .replace(/\u00A0/g, " ")
+        .replace(/[^\S\n]+/g, " ")
+        .split("\n")
+        .map((line) => line.replace(/ +/g, " ").trim())
+        .join("\n")
+        .replace(/ +\n/g, "\n")
+        .replace(/\n[ \t]+/g, "\n")
+        .trim();
+      el.innerHTML = "";
+      el.appendChild(buildCharSpans(text));
+      el.style.opacity = "1";
+      el.style.transform = "";
     });
 
     if (!reducedMotion && "IntersectionObserver" in window) {
@@ -100,33 +172,38 @@
             return;
           }
 
-          const fullText = (el.dataset.typewriterOriginal || el.textContent || "").replace(/\s+/g, " ").trim();
-          const chars = [...fullText];
-          const cps = 18;
-          const totalMs = Math.max(450, Math.min(2200, Math.round((chars.length / cps) * 1000)));
-          const start = performance.now();
+          const chars = Array.from(el.querySelectorAll(".tw-char"));
+          const stepMs = Number(el.dataset.typewriterStepMs || "26");
+          const fadeMs = Number(el.dataset.typewriterFadeMs || "120");
+          const maxTotalMs = Number(el.dataset.typewriterMaxMs || "2400");
+          const effectiveStep = Math.max(8, Math.min(stepMs, Math.floor(maxTotalMs / Math.max(1, chars.length))));
 
-          const tick = (now) => {
-            const progress = Math.min(1, (now - start) / totalMs);
-            const count = Math.max(1, Math.floor(progress * chars.length));
-            el.textContent = chars.slice(0, count).join("");
-            if (progress < 1) requestAnimationFrame(tick);
-            else {
-              el.textContent = fullText;
-              el.dataset.typewriterDone = "true";
-              obs.unobserve(el);
-            }
-          };
+          chars.forEach((span, idx) => {
+            span.style.transition = `opacity ${fadeMs}ms ease`;
+            span.style.transitionDelay = `${idx * effectiveStep}ms`;
+          });
 
-          requestAnimationFrame(tick);
+          requestAnimationFrame(() => {
+            chars.forEach((span) => {
+              span.style.opacity = "1";
+            });
+          });
+
+          el.dataset.typewriterDone = "true";
+          obs.unobserve(el);
         });
       }, { threshold: 0.35 });
 
       typewriterTargets.forEach((el) => io.observe(el));
     } else if (!reducedMotion) {
-      // Fallback: sin IntersectionObserver, mostramos el texto completo.
+      // Fallback: sin IntersectionObserver, mostramos sin animación.
       typewriterTargets.forEach((el) => {
-        el.textContent = (el.dataset.typewriterOriginal || el.textContent || "").replace(/\s+/g, " ").trim();
+        const chars = Array.from(el.querySelectorAll(".tw-char"));
+        chars.forEach((span) => {
+          span.style.transition = "";
+          span.style.transitionDelay = "";
+          span.style.opacity = "1";
+        });
         el.dataset.typewriterDone = "true";
       });
     }
@@ -290,6 +367,30 @@
       );
     }
   });
+
+  // Página 8: slide-8-shape crece con el scroll (escala uniforme desde el centro).
+  const page08 = document.querySelector("#page-08");
+  const page08ShapeImg = page08?.querySelector(".page08-shape img");
+  if (page08 && page08ShapeImg) {
+    gsap.set(page08ShapeImg, {
+      transformOrigin: "50% 50%",
+      force3D: true,
+    });
+    gsap.fromTo(
+      page08ShapeImg,
+      { scale: 1 },
+      {
+        scale: 1.28,
+        ease: "none",
+        scrollTrigger: {
+          trigger: page08,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        },
+      }
+    );
+  }
 
   // Slide 2: parallax diferencial (shape mas rapido que texto).
   const page02 = document.querySelector("#page-02");
