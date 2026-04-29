@@ -11,34 +11,61 @@
     <link rel="stylesheet" href="./styles/main.css" />
   </head>
   <body>
-    <button
-      class="sound-indicator"
-      id="sound-indicator"
-      type="button"
-      aria-label="Sonido: detenido"
-      aria-pressed="false"
-    >
-      <svg
-        class="sound-indicator__wave"
-        id="wave"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 50 38.05"
-        role="img"
-        aria-hidden="true"
-        focusable="false"
+    <div class="hud-controls" aria-label="Controles">
+      <button
+        class="sound-indicator"
+        id="sound-indicator"
+        type="button"
+        aria-label="Sonido: detenido"
+        aria-pressed="false"
       >
-        <title>Audio Wave</title>
-        <path id="Line_1" d="M0.91,15L0.78,15A1,1,0,0,0,0,16v6a1,1,0,1,0,2,0s0,0,0,0V16a1,1,0,0,0-1-1H0.91Z" />
-        <path id="Line_2" d="M6.91,9L6.78,9A1,1,0,0,0,6,10V28a1,1,0,1,0,2,0s0,0,0,0V10A1,1,0,0,0,7,9H6.91Z" />
-        <path id="Line_3" d="M12.91,0L12.78,0A1,1,0,0,0,12,1V37a1,1,0,1,0,2,0s0,0,0,0V1a1,1,0,0,0-1-1H12.91Z" />
-        <path id="Line_4" d="M18.91,10l-0.12,0A1,1,0,0,0,18,11V27a1,1,0,1,0,2,0s0,0,0,0V11a1,1,0,0,0-1-1H18.91Z" />
-        <path id="Line_5" d="M24.91,15l-0.12,0A1,1,0,0,0,24,16v6a1,1,0,0,0,2,0s0,0,0,0V16a1,1,0,0,0-1-1H24.91Z" />
-        <path id="Line_6" d="M30.91,10l-0.12,0A1,1,0,0,0,30,11V27a1,1,0,1,0,2,0s0,0,0,0V11a1,1,0,0,0-1-1H30.91Z" />
-        <path id="Line_7" d="M36.91,0L36.78,0A1,1,0,0,0,36,1V37a1,1,0,1,0,2,0s0,0,0,0V1a1,1,0,0,0-1-1H36.91Z" />
-        <path id="Line_8" d="M42.91,9L42.78,9A1,1,0,0,0,42,10V28a1,1,0,1,0,2,0s0,0,0,0V10a1,1,0,0,0-1-1H42.91Z" />
-        <path id="Line_9" d="M48.91,15l-0.12,0A1,1,0,0,0,48,16v6a1,1,0,1,0,2,0s0,0,0,0V16a1,1,0,0,0-1-1H48.91Z" />
-      </svg>
-    </button>
+        <svg
+          class="sound-indicator__wave"
+          id="wave"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 50 38.05"
+          role="img"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <title>Audio Wave</title>
+          <path id="Line_1" d="M0.91,15L0.78,15A1,1,0,0,0,0,16v6a1,1,0,1,0,2,0s0,0,0,0V16a1,1,0,0,0-1-1H0.91Z" />
+          <path id="Line_2" d="M6.91,9L6.78,9A1,1,0,0,0,6,10V28a1,1,0,1,0,2,0s0,0,0,0V10A1,1,0,0,0,7,9H6.91Z" />
+          <path id="Line_3" d="M12.91,0L12.78,0A1,1,0,0,0,12,1V37a1,1,0,1,0,2,0s0,0,0,0V1a1,1,0,0,0-1-1H12.91Z" />
+          <path id="Line_4" d="M18.91,10l-0.12,0A1,1,0,0,0,18,11V27a1,1,0,1,0,2,0s0,0,0,0V11a1,1,0,0,0-1-1H18.91Z" />
+          <path id="Line_5" d="M24.91,15l-0.12,0A1,1,0,0,0,24,16v6a1,1,0,0,0,2,0s0,0,0,0V16a1,1,0,0,0-1-1H24.91Z" />
+          <path id="Line_6" d="M30.91,10l-0.12,0A1,1,0,0,0,30,11V27a1,1,0,1,0,2,0s0,0,0,0V11a1,1,0,0,0-1-1H30.91Z" />
+          <path id="Line_7" d="M36.91,0L36.78,0A1,1,0,0,0,36,1V37a1,1,0,1,0,2,0s0,0,0,0V1a1,1,0,0,0-1-1H36.91Z" />
+          <path id="Line_8" d="M42.91,9L42.78,9A1,1,0,0,0,42,10V28a1,1,0,1,0,2,0s0,0,0,0V10A1,1,0,0,0,43,9H42.91Z" />
+          <path id="Line_9" d="M48.91,15l-0.12,0A1,1,0,0,0,48,16v6a1,1,0,1,0,2,0s0,0,0,0V16a1,1,0,0,0-1-1H48.91Z" />
+        </svg>
+      </button>
+
+      <button class="info-trigger" id="info-trigger" type="button" aria-haspopup="dialog" aria-expanded="false">
+        +info
+      </button>
+    </div>
+
+    <div class="info-overlay" id="info-overlay" role="dialog" aria-modal="true" aria-label="Información" hidden>
+      <button class="info-overlay__close" id="info-close" type="button" aria-label="Cerrar">×</button>
+      <div class="info-overlay__content">
+        <div class="info-overlay__body">
+          <p class="info-overlay__text">
+            Este fanzine forma parte de la exposición Despertar el sueño del mundo de Faktor, y fue realizado entre el artista y la escritoria Andrea Frannco en el contexto de su exposicion individual en Urra HIP HIP.
+          </p>
+          <p class="info-overlay__date">30 de abril de 2026.</p>
+        </div>
+
+        <div class="info-overlay__logos" aria-label="Logos">
+          <img class="info-logo info-logo--urra" src="./assets/urra.png" alt="URRA" loading="lazy" />
+          <div class="info-logos-row">
+            <img class="info-logo info-logo--affair" src="./assets/affair.png" alt="Central Affair" loading="lazy" />
+            <img class="info-logo info-logo--str" src="./assets/str.png" alt="" loading="lazy" />
+            <img class="info-logo info-logo--hip" src="./assets/hip.png" alt="URRA HIP HIP" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </div>
     <main id="comic-landing">
       <section class="scene scene--orange" id="page-01" data-scene="01" aria-label="Página 1">
         <div class="layer layer--text">
@@ -129,6 +156,7 @@
       </section>
 
       <section class="scene" id="page-09" data-scene="09" aria-label="Página 9">
+        <p class="page09-corner" aria-hidden="true" data-typewriter>una nueva densidad de la materia.</p>
         <div class="page09-bounded">
           <div class="page09-shape">
             <img src="./assets/SVG/slide-9-shape.svg" alt="" loading="lazy" />
@@ -207,15 +235,103 @@
         </div>
       </section>
 
+      <section class="scene" id="page-16b" data-scene="16b" aria-label="Página 16b">
+        <div class="page16b-bounded">
+          <div class="page16b-shape">
+            <img src="./assets/SVG/slide-16b-shape.svg" alt="" loading="lazy" />
+          </div>
+        </div>
+        <p data-typewriter>
+          Caminemos. Cada roca es un asiento, una tecla o un reloj, esta historia inicia frente al agua en una piedra. En esta piedra refundamos todas las historias.
+        </p>
+      </section>
+
       <section class="scene" id="page-17" data-scene="17" aria-label="Página 17">
         <div class="page17-bounded">
           <div class="page17-shape">
             <img src="./assets/SVG/slide-17-shape.svg" alt="" loading="lazy" />
           </div>
         </div>
+      </section>
+
+      <section class="scene" id="page-18" data-scene="18" aria-label="Página 18">
+        <div class="page18-bounded">
+          <div class="page18-shape">
+            <img src="./assets/SVG/slide-18-shape.svg" alt="" loading="lazy" />
+          </div>
+        </div>
         <p data-typewriter>
-          Caminemos. Cada roca es un asiento, una tecla o un reloj, esta historia inicia frente al agua en una piedra. En esta piedra refundamos todas las historias.
+          Hay que acercarse cuando baja la marea, ese podría ser el viaje, las familias felices no somos todas iguales, esa la cábala, órdenes superpuestos tensionados, voy a enseñarte, el agua desemboca en el agua y cada ciudad se construye sobre otra.
         </p>
+      </section>
+
+      <section class="scene" id="page-18b" data-scene="18b" aria-label="Página 18b">
+        <div class="page18b-bounded">
+          <div class="page18b-shape">
+            <img src="./assets/SVG/slide-18b-shape.svg" alt="" loading="lazy" />
+          </div>
+        </div>
+        <p data-typewriter>
+          Destapá otra cerveza, la paranoia fue también la paranoia de mi época, es un cúmulo. Información mal distribuida, retaceada, escandida entre quiénes no saben bien qué es lo que llevan a cuestas. Es difícil rellenar todos los huecos.
+        </p>
+      </section>
+
+      <section class="scene" id="page-19" data-scene="19" aria-label="Página 19">
+        <div class="page19-bounded">
+          <div class="page19-shape">
+            <img src="./assets/SVG/slide-19-shape.svg" alt="" loading="lazy" />
+          </div>
+        </div>
+      </section>
+
+      <section class="scene" id="page-20" data-scene="20" aria-label="Página 20">
+        <div class="page20-bounded">
+          <div class="page20-shape">
+            <img src="./assets/SVG/slide-20-shape.svg" alt="" loading="lazy" />
+          </div>
+        </div>
+      </section>
+
+      <section class="scene" id="page-21" data-scene="21" aria-label="Página 21">
+        <div class="page21-bounded">
+          <div class="page21-shape">
+            <img src="./assets/SVG/slide-21-shape.svg" alt="" loading="lazy" />
+          </div>
+        </div>
+        <p data-typewriter>
+          Creeme, el vértigo viene de antes. Yo no sé de pasar hambre como el padre de mi padre o el tuyo. Cada desgracia carga la ceguera de su entorno, acá no sabemos qué recurso va a agotarse primero. Dame la mano,
+        </p>
+      </section>
+
+      <section class="scene" id="page-22" data-scene="22" aria-label="Página 22">
+        <div class="page22-bounded">
+          <div class="page22-shape">
+            <img src="./assets/SVG/slide-22-shape.svg" alt="" loading="lazy" />
+          </div>
+        </div>
+      </section>
+
+      <section class="scene" id="page-23" data-scene="23" aria-label="Página 23">
+        <div class="page23-bounded">
+          <div class="page23-shape">
+            <img src="./assets/SVG/slide-23-shape.svg" alt="" loading="lazy" />
+          </div>
+        </div>
+        <p data-typewriter>
+          Antes hubo una mujer que apenas conocí. Era preciosa, una gema extraña. La madre de tu madre, su llanto de lluvia torrencial, este desierto. Eso no importa. Nadie es único en su especie. Antes hubo otras piedras, palmeras y su tramo de sombra, bancos, tanques de buceo, en la despensa jugo de mango y en los autos música con bajos estridentes. Contarte esto es inventarlo de nuevo.
+        </p>
+      </section>
+
+      <section class="scene" id="page-24" data-scene="24" aria-label="Página 24">
+        <p class="page24-text page24-text--top">
+          Cualquier historia de amor empieza frente a una masa de agua o la luna. Un fenómeno cósmico frente al cual postrarse con tal de no mirarnos a la cara. No tengas miedo.
+        </p>
+        <div class="page24-bounded">
+          <div class="page24-shape">
+            <img src="./assets/SVG/slide-24-shape.svg" alt="" loading="lazy" />
+          </div>
+        </div>
+        <p class="page24-text page24-text--bottom">Tenemos tiempo.</p>
       </section>
 
     </main>

@@ -1,5 +1,8 @@
 (() => {
   const soundIndicator = document.querySelector("#sound-indicator");
+  const infoTrigger = document.querySelector("#info-trigger");
+  const infoOverlay = document.querySelector("#info-overlay");
+  const infoClose = document.querySelector("#info-close");
   let soundAudio = null;
   let isPlaying = false;
 
@@ -44,6 +47,29 @@
     soundIndicator.addEventListener("click", () => {
       if (isPlaying) stopAudio();
       else playAudio();
+    });
+  }
+
+  const setInfoUi = (open) => {
+    if (!infoOverlay) return;
+    infoOverlay.hidden = !open;
+    document.documentElement.style.overflow = open ? "hidden" : "";
+    document.body.style.overflow = open ? "hidden" : "";
+    if (infoTrigger) infoTrigger.setAttribute("aria-expanded", open ? "true" : "false");
+    if (open) infoClose?.focus?.();
+    else infoTrigger?.focus?.();
+  };
+
+  if (infoTrigger && infoOverlay) {
+    infoTrigger.addEventListener("click", () => setInfoUi(true));
+    infoClose?.addEventListener("click", () => setInfoUi(false));
+
+    infoOverlay.addEventListener("click", (e) => {
+      if (e.target === infoOverlay) setInfoUi(false);
+    });
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !infoOverlay.hidden) setInfoUi(false);
     });
   }
 

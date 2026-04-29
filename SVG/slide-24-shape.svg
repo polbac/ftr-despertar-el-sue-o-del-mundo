@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420.91 594.93">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-1, .cls-2 {
+        stroke: #fff;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-3 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        fill: #231f20;
+      }
+    </style>
+  </defs>
+  <g id="Capa_1" data-name="Capa 1">
+    <g>
+      <rect width="420.91" height="594.93"/>
+      <g>
+        <circle class="cls-1" cx="220.82" cy="240.69" r="56.16" transform="translate(-19.1 19.03) rotate(-4.73)"/>
+        <path class="cls-1" d="M130.8,205.48c-21.85,5.06-40.55,18.34-52.68,36.4"/>
+        <path class="cls-1" d="M142.4,379.18c2.69.25,5.42.38,8.17.38,48.16,0,87.21-39.04,87.21-87.21s-39.04-87.21-87.21-87.21c-6.05,0-11.96.62-17.67,1.79"/>
+        <circle class="cls-1" cx="220.82" cy="343.81" r="23.99" transform="translate(-178.44 256.85) rotate(-45)"/>
+        <circle class="cls-3" cx="220.82" cy="343.81" r="4.95"/>
+        <circle class="cls-3" cx="220.82" cy="240.67" r="4.95"/>
+        <line class="cls-1" x1="220.82" y1="148.59" x2="220.82" y2="493.22"/>
+        <line class="cls-1" x1="333.49" y1="128.01" x2="220.88" y2="240.61"/>
+        <circle class="cls-2" cx="220.82" cy="403.56" r="4.95"/>
+        <circle class="cls-2" cx="220.82" cy="437.6" r="4.95"/>
+      </g>
+    </g>
+  </g>
+</svg>
