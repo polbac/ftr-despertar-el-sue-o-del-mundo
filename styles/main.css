@@ -2,8 +2,7 @@
   --bg-main: #000;
   --bg-orange: #FFB30B;
   --bg-scene: #171a21;
-  --fg-main: #f8f6f2;
-  --fg-muted: #c9c7c2;
+  --fg-main: #fff;
   --max-text: 68ch;
 }
 
@@ -625,6 +624,227 @@ h1 {
   align-self: stretch;
 }
 
+/* Escena 11: panel negro centrado, sin texto */
+#page-11 {
+  z-index: 11;
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 1.4vw;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  isolation: isolate;
+}
+
+#page-11 .page11-bounded {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  box-sizing: border-box;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.4vw;
+  overflow: hidden;
+}
+
+#page-11 .page11-shape {
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+#page-11 .page11-shape img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: min(68vh, 100%);
+  object-fit: contain;
+}
+
+/* Escena 12: contenedor negro con 2 shapes superpuestos */
+@keyframes page12-shape-opacity {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+#page-12 {
+  z-index: 12;
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 1.4vw;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  isolation: isolate;
+}
+
+#page-12 .page12-bounded {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  box-sizing: border-box;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.4vw;
+  overflow: hidden;
+}
+
+#page-12 .page12-stack {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+#page-12 .page12-shape {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: min(68vh, 100%);
+  object-fit: contain;
+}
+
+#page-12 .page12-shape--animated {
+  animation: page12-shape-opacity 4.5s ease-in-out infinite;
+  will-change: opacity;
+  width: 60%;
+}
+
+#page-12 .page12-shape--overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  width: 30%;
+  
+}
+
+/* Escenas 13–17: panel negro centrado, sin animación */
+#page-13,
+#page-14,
+#page-15,
+#page-16,
+#page-17 {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 1.4vw;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  isolation: isolate;
+}
+
+#page-13 {
+  z-index: 13;
+  min-height: auto;
+}
+#page-14 {
+  z-index: 14;
+}
+#page-15 {
+  z-index: 15;
+}
+#page-16 {
+  z-index: 16;
+}
+#page-17 {
+  z-index: 17;
+}
+
+#page-13 .page13-bounded,
+#page-14 .page14-bounded,
+#page-15 .page15-bounded,
+#page-16 .page16-bounded,
+#page-17 .page17-bounded {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  box-sizing: border-box;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Escena 17: panel + texto abajo */
+#page-17 {
+  gap: 1.5rem;
+}
+
+#page-17 .page17-bounded {
+  flex: 0 0 auto;
+}
+
+#page-17 > p {
+  margin: 0;
+  flex: 0 0 auto;
+  color: #1e1e1e;
+  background: #fff;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 2rem;
+  line-height: 1.2;
+  text-wrap: pretty;
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+  padding: 0;
+  align-self: stretch;
+}
+
+#page-14 .page14-shape,
+#page-13 .page13-shape,
+#page-15 .page15-shape,
+#page-16 .page16-shape,
+#page-17 .page17-shape {
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+#page-14 .page14-shape img,
+#page-13 .page13-shape img,
+#page-15 .page15-shape img,
+#page-16 .page16-shape img,
+#page-17 .page17-shape img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: min(68vh, 100%);
+  object-fit: contain;
+}
+
 #page-03 .page03-content,
 #page-04 .page04-content,
 #page-05 .page05-content {
@@ -747,7 +967,14 @@ h1 {
   #page-07,
   #page-08,
   #page-09,
-  #page-10 {
+  #page-10,
+  #page-11,
+  #page-12,
+  #page-13,
+  #page-14,
+  #page-15,
+  #page-16,
+  #page-17 {
     padding: 1.2rem;
   }
 
@@ -755,6 +982,16 @@ h1 {
   #page-08 .page08-bounded,
   #page-09 .page09-bounded,
   #page-10 .page10-bounded {
+    padding: 0;
+  }
+
+  #page-11 .page11-bounded,
+  #page-12 .page12-bounded,
+  #page-13 .page13-bounded,
+  #page-14 .page14-bounded,
+  #page-15 .page15-bounded,
+  #page-16 .page16-bounded,
+  #page-17 .page17-bounded {
     padding: 0;
   }
 }
@@ -799,7 +1036,14 @@ h1 {
   #page-07,
   #page-08,
   #page-09,
-  #page-10 {
+  #page-10,
+  #page-11,
+  #page-12,
+  #page-13,
+  #page-14,
+  #page-15,
+  #page-16,
+  #page-17 {
     padding: 1.2rem;
   }
 
@@ -809,7 +1053,22 @@ h1 {
   #page-10 .page10-bounded {
     padding: 0;
   }
+
+  #page-11 .page11-bounded,
+  #page-12 .page12-bounded,
+  #page-13 .page13-bounded,
+  #page-14 .page14-bounded,
+  #page-15 .page15-bounded,
+  #page-16 .page16-bounded,
+  #page-17 .page17-bounded {
+    padding: 0;
+  }
 }
+
+#page-14,
+#page-15,
+#page-16,
+#page-17{min-height: auto;}
 
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -823,6 +1082,11 @@ h1 {
   }
 
   #page-06 .page06-shape img {
+    animation: none !important;
+    opacity: 1;
+  }
+
+  #page-12 .page12-shape--animated {
     animation: none !important;
     opacity: 1;
   }

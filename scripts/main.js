@@ -55,6 +55,12 @@
       if (!el.dataset.typewriterOriginal) el.dataset.typewriterOriginal = el.textContent;
       el.dataset.typewriterDone = "false";
       if (reducedMotion) return;
+      // Evitar “saltos” de layout: fijamos el alto que ocupa el texto final
+      // antes de vaciar el contenido para escribirlo progresivamente.
+      if (!el.style.minHeight || el.style.minHeight === "0px") {
+        const rect = el.getBoundingClientRect();
+        if (rect.height > 0) el.style.minHeight = `${Math.ceil(rect.height)}px`;
+      }
       el.textContent = "";
     });
 
