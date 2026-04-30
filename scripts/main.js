@@ -389,7 +389,7 @@
         ease: "none",
         scrollTrigger: {
           trigger: page08,
-          start: "top 50%",
+          start: "top 25%",
           end: "bottom top",
           scrub: true,
         },
