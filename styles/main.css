@@ -1650,6 +1650,10 @@ h1 {
 }
 
 @media (max-width: 640px) {
+  #page-01 .layer--shape{left: -40%;}
+  #page-01 .layer--text{
+    width:70vw;
+  }
   #page-07,
   #page-03, #page-04, #page-05{
     min-height: 50vh;
