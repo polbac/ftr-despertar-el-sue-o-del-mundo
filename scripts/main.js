@@ -192,122 +192,6 @@
 
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  const typewriterTargets = Array.from(document.querySelectorAll("[data-typewriter]"));
-  if (typewriterTargets.length) {
-    const htmlToPlainTextWithNewlines = (html) => {
-      const temp = document.createElement("div");
-      temp.innerHTML = String(html).replace(/<br\s*\/?>/gi, "\n");
-      return temp.textContent || "";
-    };
-
-    const buildCharSpans = (text) => {
-      const frag = document.createDocumentFragment();
-      const lines = text.split("\n");
-
-      const appendCharsForWord = (word, container) => {
-        [...word].forEach((ch) => {
-          const span = document.createElement("span");
-          span.className = "tw-char";
-          span.style.opacity = "0";
-          span.style.display = "inline";
-          span.style.willChange = "opacity";
-          span.textContent = ch;
-          container.appendChild(span);
-        });
-      };
-
-      lines.forEach((line, lineIdx) => {
-        if (lineIdx > 0) frag.appendChild(document.createElement("br"));
-
-        if (line.length === 0) {
-          frag.appendChild(document.createElement("br"));
-          return;
-        }
-
-        const words = line.split(/ +/).filter(Boolean);
-        words.forEach((word, wi) => {
-          if (wi > 0) frag.appendChild(document.createTextNode(" "));
-          const wordSpan = document.createElement("span");
-          wordSpan.className = "tw-word";
-          appendCharsForWord(word, wordSpan);
-          frag.appendChild(wordSpan);
-        });
-      });
-
-      return frag;
-    };
-
-    typewriterTargets.forEach((el) => {
-      if (!el.dataset.typewriterOriginalHtml) el.dataset.typewriterOriginalHtml = el.innerHTML;
-      el.dataset.typewriterDone = "false";
-      if (reducedMotion) {
-        el.style.opacity = "1";
-        el.style.transform = "";
-        return;
-      }
-      const text = htmlToPlainTextWithNewlines(el.dataset.typewriterOriginalHtml)
-        .replace(/\r\n?/g, "\n")
-        .replace(/\u00A0/g, " ")
-        .replace(/[^\S\n]+/g, " ")
-        .split("\n")
-        .map((line) => line.replace(/ +/g, " ").trim())
-        .join("\n")
-        .replace(/ +\n/g, "\n")
-        .replace(/\n[ \t]+/g, "\n")
-        .trim();
-      el.innerHTML = "";
-      el.appendChild(buildCharSpans(text));
-      el.style.opacity = "1";
-      el.style.transform = "";
-    });
-
-    if (!reducedMotion && "IntersectionObserver" in window) {
-      const io = new IntersectionObserver((entries, obs) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          const el = entry.target;
-          if (el.dataset.typewriterDone === "true") {
-            obs.unobserve(el);
-            return;
-          }
-
-          const chars = Array.from(el.querySelectorAll(".tw-char"));
-          const stepMs = Number(el.dataset.typewriterStepMs || "26");
-          const fadeMs = Number(el.dataset.typewriterFadeMs || "120");
-          const maxTotalMs = Number(el.dataset.typewriterMaxMs || "2400");
-          const effectiveStep = Math.max(8, Math.min(stepMs, Math.floor(maxTotalMs / Math.max(1, chars.length))));
-
-          chars.forEach((span, idx) => {
-            span.style.transition = `opacity ${fadeMs}ms ease`;
-            span.style.transitionDelay = `${idx * effectiveStep}ms`;
-          });
-
-          requestAnimationFrame(() => {
-            chars.forEach((span) => {
-              span.style.opacity = "1";
-            });
-          });
-
-          el.dataset.typewriterDone = "true";
-          obs.unobserve(el);
-        });
-      }, { threshold: 0.35 });
-
-      typewriterTargets.forEach((el) => io.observe(el));
-    } else if (!reducedMotion) {
-      // Fallback: sin IntersectionObserver, mostramos sin animación.
-      typewriterTargets.forEach((el) => {
-        const chars = Array.from(el.querySelectorAll(".tw-char"));
-        chars.forEach((span) => {
-          span.style.transition = "";
-          span.style.transitionDelay = "";
-          span.style.opacity = "1";
-        });
-        el.dataset.typewriterDone = "true";
-      });
-    }
-  }
-
   if (reducedMotion) return;
   if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
 
@@ -467,6 +351,28 @@
     }
   });
 
+  // Página 4: el shape se desplaza hacia la derecha con el scroll.
+  // (La nube queda estática y pegada abajo a la derecha desde CSS.)
+  const page04 = document.querySelector("#page-04");
+  const page04Window = page04?.querySelector(".frame-window");
+  const page04Shape = page04Window?.querySelector(".frame-window__shape");
+  if (page04 && page04Window && page04Shape) {
+    gsap.set(page04Shape, { x: 0, force3D: true });
+    const maxShift = () => Math.min(280, page04Window.getBoundingClientRect().width * 0.28);
+
+    gsap.to(page04Shape, {
+      x: () => maxShift(),
+      ease: "none",
+      scrollTrigger: {
+        trigger: page04,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+        invalidateOnRefresh: true,
+      },
+    });
+  }
+
   // Página 8: slide-8-shape crece con el scroll (escala uniforme desde el centro).
   const page08 = document.querySelector("#page-08");
   const page08ShapeImg = page08?.querySelector(".page08-shape img");
@@ -479,16 +385,35 @@
       page08ShapeImg,
       { scale: 1 },
       {
-        scale: 1.28,
+        scale: 5,
         ease: "none",
         scrollTrigger: {
           trigger: page08,
-          start: "top bottom",
+          start: "top 50%",
           end: "bottom top",
           scrub: true,
         },
       }
     );
+  }
+
+  // Página 23: la luna aparece arriba y baja un poco con scroll.
+  const page23 = document.querySelector("#page-23");
+  const page23Luna = page23?.querySelector(".page23-luna");
+  if (page23 && page23Luna) {
+    gsap.set(page23Luna, { x: 0, y: 0, force3D: true });
+    gsap.to(page23Luna, {
+      x: 0,
+      y: 70,
+      ease: "none",
+      scrollTrigger: {
+        trigger: page23,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+        invalidateOnRefresh: true,
+      },
+    });
   }
 
   // Slide 2: parallax diferencial (shape mas rapido que texto).

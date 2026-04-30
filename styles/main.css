@@ -31,19 +31,12 @@ body {
   font-family: "Courier New", Courier, monospace;
 }
 
+html {
+  font-size: 1.51vw;
+}
+
 body {
   overflow-x: hidden;
-}
-
-/* Texto animado por caracteres: no partir palabras al hacer wrap */
-[data-typewriter] .tw-word {
-  white-space: nowrap;
-  display: inline;
-}
-
-[data-typewriter] {
-  overflow-wrap: break-word;
-  word-break: normal;
 }
 
 /* Cursor custom: cuadrado con borde negro + inversión del contenido bajo el cursor */
@@ -177,7 +170,7 @@ html.has-custom-cursor select {
   
   color: #fff;
   font-family: "Courier New", Courier, monospace;
-  font-size: 1rem;
+  font-size: 1.52vw;
   letter-spacing: 0.03em;
   cursor: pointer;
   
@@ -242,7 +235,7 @@ html.has-custom-cursor select {
 
 .info-overlay__text {
   margin: 0;
-  font-size: 1rem;
+  font-size: 1.52vw;
   line-height: 1.35;
   text-wrap: pretty;
 }
@@ -250,7 +243,7 @@ html.has-custom-cursor select {
 .info-overlay__date {
   margin: 1.2rem 0 0;
   text-align: right;
-  font-size: 1rem;
+  font-size: 1.52vw;
   line-height: 1.2;
 }
 
@@ -426,20 +419,20 @@ html.has-custom-cursor select {
   margin: 0 0 0.4rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  font-size: 1rem;
+  font-size: 1.52vw;
   opacity: 0.8;
 }
 
 h1 {
   margin: 0;
-  font-size: 1rem;
+  font-size: 1.52vw;
   line-height: 1;
   text-wrap: balance;
 }
 
 .prose p {
   margin: 0 0 1rem;
-  font-size: 1rem;
+  font-size: 1.52vw;
   line-height: 1.7;
   text-wrap: pretty;
 }
@@ -451,7 +444,7 @@ h1 {
 .interlude p {
   margin: 0;
   color: var(--fg-muted);
-  font-size: 1rem;
+  font-size: 1.52vw;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -516,13 +509,13 @@ h1 {
   background: #fff;
   color: #000;
   font-family: "Courier New", Courier, monospace;
-  font-size: 1rem;
+  font-size: 1.52vw;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   cursor: pointer;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
-  box-shadow: 0 10px 28px rgb(0 0 0 / 0.35);
+  filter:invert(1)
 }
 
 #page-01 .page01-start__icon {
@@ -746,7 +739,7 @@ h1 {
   color: #1e1e1e;
   background: #fff;
   font-family: "Courier New", Courier, monospace;
-  font-size: 1rem;
+  font-size: 1.52vw;
   line-height: 1.2;
   text-wrap: pretty;
   width: 100%;
@@ -811,7 +804,7 @@ h1 {
   color: #1e1e1e;
   background: #fff;
   font-family: "Courier New", Courier, monospace;
-  font-size: 1rem;
+  font-size: 1.52vw;
   line-height: 1.2;
   text-wrap: pretty;
   width: 100%;
@@ -840,11 +833,11 @@ h1 {
 #page-09 .page09-corner {
   position: absolute;
   top: 0;
-  right: 2vw;
+  right: 3vw;
   margin: 0;
   color: #000;
   font-family: "Courier New", Courier, monospace;
-  font-size: 1rem;
+  font-size: 1.52vw;
   line-height: 1.1;
   letter-spacing: 0.01em;
   text-align: right;
@@ -887,9 +880,9 @@ h1 {
   margin: 0;
   flex: 0 0 auto;
   color: #1e1e1e;
-  background: #fff;
+  
   font-family: "Courier New", Courier, monospace;
-  font-size: 1rem;
+  font-size: 1.52vw;
   line-height: 1.2;
   text-wrap: pretty;
   width: 100%;
@@ -951,7 +944,7 @@ h1 {
   color: #1e1e1e;
   background: #fff;
   font-family: "Courier New", Courier, monospace;
-  font-size: 1rem;
+  font-size: 1.7vw;
   line-height: 1.2;
   text-wrap: pretty;
   width: 100%;
@@ -1136,6 +1129,16 @@ h1 {
   z-index: 1;
 }
 
+#cubo-blanco{
+  width: 240px;
+  height: 122px;
+  position: absolute;
+  z-index: 139;
+  background: white;
+  top: 94.3%;
+  left: 10px;
+}
+
 @keyframes page17-lines-reveal {
   0% {
     opacity: 0;
@@ -1143,11 +1146,11 @@ h1 {
   }
   50% {
     opacity: 1;
-    transform: scale(0.5);
+    transform: scale(0.25);
   }
   100% {
     opacity: 0;
-    transform: scale(1);
+    transform: scale(0.6);
   }
 }
 
@@ -1202,12 +1205,12 @@ h1 {
   margin: 0;
   color: #fff;
   font-family: "Courier New", Courier, monospace;
-  font-size: 1rem;
+  font-size: 1.52vw;
   line-height: 1.2;
   text-wrap: pretty;
   width: 100%;
   box-sizing: border-box;
-
+  padding:2vw;
 }
 
 #page-24 .page24-text--bottom {
@@ -1238,6 +1241,36 @@ h1 {
   justify-content: center;
   padding: 0;
   overflow: hidden;
+}
+
+#page-14 .page14-bounded {
+  position: relative;
+  border: 1px solid #000;
+}
+
+@keyframes page14-lines-pulse {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+#page-14 .page14-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 10;
+  opacity: 0;
+  animation: page14-lines-pulse 4.5s ease-in-out infinite;
+  will-change: opacity;
 }
 
 #page-18 {
@@ -1311,6 +1344,19 @@ h1 {
 
 #page-23 .page23-bounded {
   flex: 0 0 auto;
+  position: relative;
+}
+
+#page-23 .page23-luna {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: none;
+  object-fit: contain;
+  z-index: 10;
+  pointer-events: none;
+  will-change: transform;
 }
 
 #page-24 .page24-bounded {
@@ -1331,7 +1377,7 @@ h1 {
   color: #1e1e1e;
   background: #fff;
   font-family: "Courier New", Courier, monospace;
-  font-size: 1rem;
+  font-size: 1.66vw;
   line-height: 1.2;
   text-wrap: pretty;
   width: 100%;
@@ -1347,7 +1393,8 @@ h1 {
   color: #1e1e1e;
   background: #fff;
   font-family: "Courier New", Courier, monospace;
-  font-size: 1rem;
+  font-size: 1.51vw;
+  letter-spacing: 0.19vw;
   line-height: 1.2;
   text-wrap: pretty;
   width: 100%;
@@ -1363,7 +1410,7 @@ h1 {
   color: #1e1e1e;
   background: #fff;
   font-family: "Courier New", Courier, monospace;
-  font-size: 1rem;
+  font-size: 1.51vw;
   line-height: 1.2;
   text-wrap: pretty;
   width: 100%;
@@ -1371,6 +1418,7 @@ h1 {
   box-sizing: border-box;
   padding: 0;
   align-self: stretch;
+  letter-spacing: 0.2vw;
 }
 
 #page-21 > p {
@@ -1379,7 +1427,7 @@ h1 {
   color: #1e1e1e;
   background: #fff;
   font-family: "Courier New", Courier, monospace;
-  font-size: 1rem;
+  font-size: 1.52vw;
   line-height: 1.2;
   text-wrap: pretty;
   width: 100%;
@@ -1395,7 +1443,7 @@ h1 {
   color: #1e1e1e;
   background: #fff;
   font-family: "Courier New", Courier, monospace;
-  font-size: 1rem;
+  font-size: 1.53vw;
   line-height: 1.2;
   text-wrap: pretty;
   width: 100%;
@@ -1464,6 +1512,10 @@ h1 {
   margin-bottom: 1.5rem;
 }
 
+#page-04 .frame-window {
+  background: #000;
+}
+
 /* slide-5: 100% de ancho; el alto lo dicta la proporcion intrinseca de la imagen (SVG) */
 #page-05 .frame-window {
   position: relative;
@@ -1486,6 +1538,28 @@ h1 {
   display: block;
   object-fit: cover;
   object-position: center;
+}
+
+/* Page 4: el SVG debe ocupar todo el frame */
+#page-04 .frame-window__shape {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 2;
+  will-change: transform;
+}
+
+#page-04 .page04-nube {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: auto;
+  height: 100%;
+  transform: none;
+  z-index: 1;
+  pointer-events: none;
 }
 
 #page-05 .frame-window__shape {
@@ -1534,7 +1608,7 @@ h1 {
   margin: 0;
   color: #000;
   font-family: "Courier New", Courier, monospace;
-  font-size: 1rem;
+  font-size: 1.52vw;
   line-height: 1.2;
 }
 
@@ -1622,6 +1696,10 @@ h1 {
     padding: 1.2rem;
   }
 
+  #page-10 {
+    min-height: auto;
+  }
+
   #page-07 .page07-bounded,
   #page-08 .page08-bounded,
   #page-09 .page09-bounded,
@@ -1650,6 +1728,10 @@ h1 {
 }
 
 @media (max-width: 640px) {
+  html {
+    font-size: 1.9vw;
+  }
+
   #page-01 .layer--shape{left: -40%;}
   #page-01 .layer--text{
     width:70vw;
@@ -1678,7 +1760,7 @@ h1 {
   }
 
   .prose p {
-    font-size: 1rem;
+    font-size: 1.52vw;
     line-height: 1.6;
   }
 
@@ -1802,6 +1884,11 @@ h1 {
     animation: none !important;
     opacity: 1;
     transform: scale(1);
+  }
+
+  #page-14 .page14-lines {
+    animation: none !important;
+    opacity: 1;
   }
 
   #page-22 .page22-brazo-wrap {
