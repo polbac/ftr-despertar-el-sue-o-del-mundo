@@ -1210,7 +1210,7 @@ h1 {
   text-wrap: pretty;
   width: 100%;
   box-sizing: border-box;
-  padding:2vw;
+  padding:3vw;
 }
 
 #page-24 .page24-text--bottom {
@@ -1728,6 +1728,7 @@ h1 {
 }
 
 @media (max-width: 640px) {
+  #page-24 .page24-text{padding: 0;}
   html {
     font-size: 1.9vw;
   }
