@@ -1163,7 +1163,7 @@ h1 {
   object-fit: contain;
   pointer-events: none;
   z-index: 2;
-  top: -32%;
+  top: -33%;
   left: -62%;
   transform-origin: center center;
   animation: page17-lines-reveal 9s linear infinite;
