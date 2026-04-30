@@ -170,7 +170,7 @@ html.has-custom-cursor select {
   
   color: #fff;
   font-family: "Courier New", Courier, monospace;
-  font-size: 1.5rem;
+  font-size: 1rem;
   letter-spacing: 0.03em;
   cursor: pointer;
   
@@ -235,7 +235,7 @@ html.has-custom-cursor select {
 
 .info-overlay__text {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 1rem;
   line-height: 1.35;
   text-wrap: pretty;
 }
@@ -243,7 +243,7 @@ html.has-custom-cursor select {
 .info-overlay__date {
   margin: 1.2rem 0 0;
   text-align: right;
-  font-size: 1.5rem;
+  font-size: 1rem;
   line-height: 1.2;
 }
 
@@ -509,7 +509,7 @@ h1 {
   background: #fff;
   color: #000;
   font-family: "Courier New", Courier, monospace;
-  font-size: 1.5rem;
+  font-size: 1rem;
   letter-spacing: 0.2em;
   
   cursor: pointer;
@@ -1747,6 +1747,9 @@ h1 {
 }
 
 @media (max-width: 640px) {
+  #page-01 .page01-start,.info-trigger,.page01-start,.info-overlay__content,.info-overlay__text,.info-overlay__date{
+    font-size:2rem
+  }
   #page-23 .page23-luna{margin-top: -5vh;}
   .page22-bounded{
     margin-top: -10vh;
@@ -1923,4 +1926,6 @@ h1 {
   .sound-indicator.is-playing .sound-indicator__wave [id^="Line_"] {
     animation: none !important;
   }
+
+  
 }
