@@ -504,7 +504,7 @@ h1 {
 #page-01 .page01-start {
   position: absolute;
   left: 50%;
-  bottom: max(18px, env(safe-area-inset-bottom));
+  bottom: 5vh;
   transform: translateX(-50%);
   z-index: 3;
   display: inline-flex;
@@ -1650,6 +1650,19 @@ h1 {
 }
 
 @media (max-width: 640px) {
+  #page-07,
+  #page-03, #page-04, #page-05{
+    min-height: 50vh;
+  }
+  #page-03 .frame-window,
+  #page-04 .frame-window {
+    height: 20vh;
+  }
+
+  #page-01 .page01-start {
+    bottom: 10vh;
+  }
+
   .scene {
     min-height: 112vh;
     padding: 9vh 1.25rem;
