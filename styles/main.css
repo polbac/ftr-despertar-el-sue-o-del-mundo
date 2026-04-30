@@ -1749,7 +1749,7 @@ h1 {
 @media (max-width: 640px) {
   #page-23 .page23-luna{margin-top: -5vh;}
   .page22-bounded{
-    margin-top: -5vh;
+    margin-top: -10vh;
   }
   #page-24 .page24-text{padding: 0;}
   html {
@@ -1770,7 +1770,7 @@ h1 {
   }
 
   #page-01 .page01-start {
-    bottom: 20h;
+    bottom: 20vh;
   }
 
   .scene {
