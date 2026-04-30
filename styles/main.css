@@ -1572,10 +1572,10 @@ h1 {
 
 @keyframes page05-clouds-drift {
   from {
-    transform: translateX(-100%);
+    transform: translateX(-200%);
   }
   to {
-    transform: translateX(100%);
+    transform: translateX(250%);
   }
 }
 
