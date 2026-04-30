@@ -462,7 +462,7 @@ h1 {
 
 #page-01 {
   background: #000;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   position: fixed;
   inset: 0;
   z-index: 1;
@@ -571,7 +571,7 @@ h1 {
 #page-04,
 #page-05 {
   background: #fff;
-  min-height: 100vh;
+  min-height: auto;
   padding: 3vw;
   padding-bottom: 0;
 }
@@ -657,7 +657,7 @@ h1 {
   z-index: 7;
   width: 100%;
   max-width: 100%;
-  min-height: 100vh;
+  min-height: auto;
   box-sizing: border-box;
   padding: 3vw;
   background: #fff;
@@ -1646,6 +1646,9 @@ h1 {
 }
 
 @media (max-width: 900px) {
+  #page-24 .page24-text{
+    padding: 1vw;
+  }
   .scene {
     min-height: 125vh;
     padding: 10vh 6vw;
@@ -1744,6 +1747,7 @@ h1 {
 }
 
 @media (max-width: 640px) {
+  #page-23 .page23-luna{margin-top: -5vh;}
   .page22-bounded{
     margin-top: -5vh;
   }
