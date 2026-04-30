@@ -118,6 +118,7 @@
     // Nota: el archivo tiene espacios en el nombre; encodeURI los convierte a %20.
     soundAudio = new Audio(encodeURI("./audio muestra komic.mp3"));
     soundAudio.preload = "auto";
+    soundAudio.loop = true;
     return soundAudio;
   };
 
@@ -385,7 +386,7 @@
       page08ShapeImg,
       { scale: 1 },
       {
-        scale: 5,
+        scale: 2.5,
         ease: "none",
         scrollTrigger: {
           trigger: page08,
