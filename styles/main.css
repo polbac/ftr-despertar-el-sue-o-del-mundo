@@ -781,7 +781,7 @@ h1 {
 
 #page-08 .page08-shape {
   width: 100%;
-  min-height: 0;
+  min-height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;

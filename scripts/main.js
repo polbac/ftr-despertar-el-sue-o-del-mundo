@@ -386,11 +386,11 @@
       page08ShapeImg,
       { scale: 1 },
       {
-        scale: 2.5,
+        scale: 1.5,
         ease: "none",
         scrollTrigger: {
           trigger: page08,
-          start: "top 25%",
+          start: "top 75%",
           end: "bottom top",
           scrub: true,
         },
