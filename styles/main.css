@@ -170,7 +170,7 @@ html.has-custom-cursor select {
   
   color: #fff;
   font-family: "Courier New", Courier, monospace;
-  font-size: 1.52vw;
+  font-size: 2rem;
   letter-spacing: 0.03em;
   cursor: pointer;
   
@@ -235,7 +235,7 @@ html.has-custom-cursor select {
 
 .info-overlay__text {
   margin: 0;
-  font-size: 1.52vw;
+  font-size: 2rem;
   line-height: 1.35;
   text-wrap: pretty;
 }
@@ -243,7 +243,7 @@ html.has-custom-cursor select {
 .info-overlay__date {
   margin: 1.2rem 0 0;
   text-align: right;
-  font-size: 1.52vw;
+  font-size: 2rem;
   line-height: 1.2;
 }
 
