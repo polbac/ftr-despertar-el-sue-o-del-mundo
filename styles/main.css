@@ -366,7 +366,6 @@ html.has-custom-cursor select {
 }
 
 .scene--orange {
-  background: var(--bg-orange);
   color: #121212;
   height: 100vh;
 }
