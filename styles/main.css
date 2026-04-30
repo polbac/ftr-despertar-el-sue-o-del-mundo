@@ -739,7 +739,7 @@ h1 {
   color: #1e1e1e;
   background: #fff;
   font-family: "Courier New", Courier, monospace;
-  font-size: 1.52vw;
+  font-size: 1.8vw;
   line-height: 1.2;
   text-wrap: pretty;
   width: 100%;
@@ -804,7 +804,7 @@ h1 {
   color: #1e1e1e;
   background: #fff;
   font-family: "Courier New", Courier, monospace;
-  font-size: 1.52vw;
+  font-size: 1.78vw;
   line-height: 1.2;
   text-wrap: pretty;
   width: 100%;
@@ -837,7 +837,7 @@ h1 {
   margin: 0;
   color: #000;
   font-family: "Courier New", Courier, monospace;
-  font-size: 1.52vw;
+  font-size: 1.78vw;
   line-height: 1.1;
   letter-spacing: 0.01em;
   text-align: right;
@@ -882,7 +882,7 @@ h1 {
   color: #1e1e1e;
   
   font-family: "Courier New", Courier, monospace;
-  font-size: 1.52vw;
+  font-size: 1.76vw;
   line-height: 1.2;
   text-wrap: pretty;
   width: 100%;
@@ -1536,7 +1536,7 @@ h1 {
   width: 100%;
   height: 100%;
   display: block;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
 }
 
@@ -1546,7 +1546,7 @@ h1 {
   bottom: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   z-index: 2;
   will-change: transform;
 }
@@ -1612,6 +1612,10 @@ h1 {
   line-height: 1.2;
 }
 
+#page-03 .page03-content p{
+  font-size: 1.9vw;
+}
+
 #page-08 .layer--a {
   top: auto;
   bottom: 10vh;
@@ -1632,6 +1636,10 @@ h1 {
   right: auto;
   transform: translateX(-50%);
   max-width: min(18vw, 190px);
+}
+
+.page22-bounded{
+  margin-top: -15vh;
 }
 
 @media (max-width: 900px) {
@@ -1725,9 +1733,17 @@ h1 {
   #page-24 .page24-bounded {
     padding: 0;
   }
+
+  .page22-bounded{
+    margin-top: -7vh;
+  }
+  
 }
 
 @media (max-width: 640px) {
+  .page22-bounded{
+    margin-top: -5vh;
+  }
   #page-24 .page24-text{padding: 0;}
   html {
     font-size: 1.9vw;
@@ -1738,8 +1754,8 @@ h1 {
     width:70vw;
   }
   #page-07,
-  #page-03, #page-04, #page-05{
-    min-height: 50vh;
+  #page-03, #page-04, #page-05,#page-09{
+    min-height: auto;
   }
   #page-03 .frame-window,
   #page-04 .frame-window {
